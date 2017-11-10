@@ -57,27 +57,14 @@ const SortingRadioButton = styled.div`
 class SortRadio extends React.Component {
     constructor(props) {
         super(props);
-        this.toggleRadio = this.toggleRadio.bind(this);
-        this.updateState = this.updateState.bind(this);
-        this.state = {
-            isRadioActive: !!props.default
-        };
-    }
 
-
-    toggleRadio() {
-        this.updateState({isRadioActive: !this.state.isRadioActive});
-        console.log("isRadioActive sosi", this.state.isRadioActive);
-    }
-
-    updateState(obj) {
-        this.setState(obj);
+        this.state = {};
     }
 
     render() {
         return (
-            <SortingRadioButton isRadioActive={this.state.isRadioActive}
-                                onClick={this.toggleRadio}>{this.props.content}</SortingRadioButton>
+            <SortingRadioButton onClick={this.props.onClick}
+                                isRadioActive={this.props.isRadioActive}>{this.props.content}</SortingRadioButton>
         )
     }
 }
@@ -85,17 +72,53 @@ class SortRadio extends React.Component {
 class SortingContainer extends React.Component {
     constructor() {
         super();
+        this.state = {
+            allPromos: true,
+            withGift: false,
+            clientDays: false
+        };
+
+        this.allPromosClick = this.allPromosClick.bind(this);
+        this.withGiftClick = this.withGiftClick.bind(this);
+        this.clientDaysClick = this.clientDaysClick.bind(this);
     }
 
+
+    allPromosClick() {
+        this.setState(prevState => ({
+            allPromos: true,
+            withGift: false,
+            clientDays: false
+        }));
+    }
+
+    withGiftClick() {
+        this.setState(prevState => ({
+            allPromos: false,
+            withGift: !prevState.withGift
+        }));
+    }
+
+    clientDaysClick() {
+        this.setState(prevState => ({
+            allPromos: false,
+            clientDays: !prevState.clientDays
+        }));
+    }
+
+
     render() {
-        const {isRadioActive} = this.props;
+        const {allPromos} = this.state;
+        const {withGift} = this.state;
+        const {clientDays} = this.state;
         return (
             <SortFlexContainer>
                 <div>
-                    <SortRadio isRadioActive={isRadioActive} content="Все акции" default={true}/>
-                    <SortRadio isRadioActive={isRadioActive} content="Подарок с покупкой"/>
-                    <SortRadio isRadioActive={isRadioActive} content="Клиентские дни"/>
+                    <SortRadio onClick={this.allPromosClick} isRadioActive={allPromos} content="Все акции"/>
+                    <SortRadio onClick={this.withGiftClick} isRadioActive={withGift} content="Подарок с покупкой"/>
+                    <SortRadio onClick={this.clientDaysClick} isRadioActive={clientDays} content="Клиентские дни"/>
                 </div>
+
                 <SelectBoxContainer>
                     <StyledSpan>Сортировка:</StyledSpan>
                     <Sort/>

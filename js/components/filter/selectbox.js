@@ -35,6 +35,9 @@ const SortList = styled.ul`
 
 const SortListItem = styled.li`
     padding: 5px 0;
+    &:hover {
+        color: #cd097d;
+    }
 `;
 
 // Компонент сортировки в виде select box
