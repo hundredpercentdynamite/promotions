@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledSort = styled.div`
+const SortBox = styled.div`
     position: relative;
     bottom: -1px;
     margin-left: 20px;
@@ -8,6 +8,7 @@ const StyledSort = styled.div`
     width: 180px;
     // box-sizing: border-box;
     border-bottom: 1px solid #03b4ee;
+    user-select: none;
     &::after {
         position: absolute;
         top: 5px;
@@ -22,19 +23,31 @@ const StyledSort = styled.div`
         transition: all 0.5 ease-out;
         ${props => props.showSort && 'border-top: 1px solid #6a6a6a;' +
                                      'border-left: 1px solid #6a6a6a;' +
-                                     ' border-bottom: none;' +
-                                     ' border-right: none;'
+                                     'border-bottom: none;' +
+                                     'border-right: none;' +
+                                     'top: 10px'
         }
     }
     
     @media screen and (max-width: 900px) {
         margin-left: 0;
         margin-top: 10px;
+        font-size: 20px;
+        width: 250px;
     }
     
-    @media screen and (max-width: 379px) {
-        width: 130px;
+    @media screen and (max-width: 480px) {
+        margin-top: 20px;
+        font-size: 25px;
+        width: 250px;
     }
+    
+    @media screen and (max-width: 380px) {
+        margin-top: 20px;
+        font-size: 25px;
+        width: 100%;
+    }
+    
 `;
 
 const SortList = styled.ul`
@@ -45,6 +58,12 @@ const SortList = styled.ul`
     background-color: #fcfcfc;
     width: 100%;
     z-index: 100;
+    @media screen and (max-width: 900px) {
+        top: 34px;    
+    }
+    @media screen and (max-width: 480px) {
+        top: 40px;    
+    }
 `;
 
 const SortListItem = styled.li`
@@ -93,22 +112,22 @@ export class Sort extends React.Component {
 
     render() {
         //let {sorts} = this.props;
-        let options = this.sorts.map((sortItem, i) => <SortListItem key={i}
+        const options = this.sorts.map((sortItem, i) => <SortListItem key={i}
                                                      data-code={sortItem.code}
                                                      data-name={sortItem.name}
                                                      onClick={this.clickSortItem.bind(this)}>
                                                      {sortItem.name}
                                                   </SortListItem>);
         return (
-            <StyledSort className="sort"
+            <SortBox className="sort"
                         onClick={this.sortToggle.bind(this)}
                         showSort={this.state.showSort}>
                 <div className="current-name"
                      ref={div => this.div = div}>
                         {this.state.currentSort.name}
                 </div>
-                {this.state.showSort ? <SortList className="options animated fadeInUp">{options}</SortList> : null}
-            </StyledSort>
+                {this.state.showSort && <SortList className="options animated fadeInUp">{options}</SortList>}
+            </SortBox>
         );
     }
 }

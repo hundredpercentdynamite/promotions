@@ -9,16 +9,36 @@ const PromoContainer = styled.div`
 const PromoHeading = styled.h2`
     font-size: 24px;
     font-weight: 400;
+    @media screen and (max-width: 900px) {
+        font-size: 30px;
+    }
+    @media screen and (max-width: 480px) {
+        font-size: 35px;
+    }
 `;
 
-const ItemCountStyled = styled.span`
+const ItemCount = styled.span`
     color: #6a6a6a;
+    @media screen and (max-width: 900px) {
+        font-size: 20px;
+    }
+    @media screen and (max-width: 480px) {
+        font-size: 25px;
+    }
+
 `;
 
-const StyledSpan = styled.span`
+const Label = styled.span`
     padding-top: 6px;
     padding-bottom: 4px;
     color: #6a6a6a;
+    @media screen and (max-width: 900px) {
+        font-size: 20px;
+    }
+    @media screen and (max-width: 480px) {
+        margin-top: 40px;
+        font-size: 25px;
+    }
 `;
 
 const FlexContainer = styled.div`
@@ -29,24 +49,30 @@ const FlexContainer = styled.div`
 
 const HeadingFlexContainer = FlexContainer.extend`
     padding: 15px;
-    align-items: flex-end;
+    align-items: baseline;
 `;
 
-const SortFlexContainer = FlexContainer.extend`
+const FilterFlexContainer = FlexContainer.extend`
     padding: 15px;
     padding-bottom: 0;
+    @media screen and (max-width: 480px) {
+        flex-direction: column;
+    }
 `;
 
-const SelectBoxContainer = FlexContainer.extend`
+const TogglesFlexContainer = FlexContainer.extend`
     & div {
         flex-shrink: 0;
     }
     @media screen and (max-width: 900px) {
         flex-direction: column;
     }
+    @media screen and (max-width: 380px) {
+        width: 100%;
+    }
 `;
 
-const SortingRadioButton = styled.div`
+const FilterButton = styled.div`
     padding: 5px 0;
     margin-right: 20px;
     position: relative;
@@ -55,10 +81,19 @@ const SortingRadioButton = styled.div`
     box-sizing: border-box;
     cursor: pointer;
     color: #6a6a6a;
+    user-select: none;
     ${props => props.isRadioActive && 'border-bottom: 1px solid #03b4ee; color: #000;'}
     
     @media screen and (max-width: 900px) {
         margin-top: 10px;
+        font-size: 20px;
+        &:first-child {
+           margin-top: 0;
+        }
+    }
+    @media screen and (max-width: 480px) {
+        margin-top: 20px;
+        font-size: 25px;
         &:first-child {
            margin-top: 0;
         }
@@ -75,8 +110,8 @@ class SortRadio extends React.Component {
 
     render() {
         return (
-            <SortingRadioButton onClick={this.props.onClick}
-                                isRadioActive={this.props.isRadioActive}>{this.props.content}</SortingRadioButton>
+            <FilterButton onClick={this.props.clickHandler}
+                                isRadioActive={this.props.isRadioActive}>{this.props.content}</FilterButton>
         )
     }
 }
@@ -90,53 +125,68 @@ class SortingContainer extends React.Component {
             clientDays: false
         };
 
-        this.allPromosClick = this.allPromosClick.bind(this);
-        this.withGiftClick = this.withGiftClick.bind(this);
-        this.clientDaysClick = this.clientDaysClick.bind(this);
+        this.selectPromoClick = this.selectPromoClick.bind(this);
+        this.selectAllPromo = this.selectAllPromo.bind(this);
+        this.selectWithGift = this.selectWithGift.bind(this);
+        this.selectClientDays = this.selectClientDays.bind(this);
     }
 
-
-    allPromosClick() {
-        this.setState(prevState => ({
-            allPromos: true,
-            withGift: false,
-            clientDays: false
-        }));
+    selectPromoClick(name) {
+        switch (name) {
+            case 'allPromo':
+                this.setState({
+                    allPromos: true,
+                    withGift: false,
+                    clientDays: false
+                });
+                break;
+            case 'withGift':
+                this.setState({
+                    allPromos: false,
+                    withGift: true,
+                    clientDays: false
+                });
+                break;
+            case 'clientDays':
+                this.setState({
+                    allPromos: false,
+                    withGift: false,
+                    clientDays: true
+                });
+                break;
+        }
     }
 
-    withGiftClick() {
-        this.setState(prevState => ({
-            allPromos: false,
-            withGift: !prevState.withGift
-        }));
+    selectAllPromo() {
+        this.selectPromoClick('allPromo')
     }
 
-    clientDaysClick() {
-        this.setState(prevState => ({
-            allPromos: false,
-            clientDays: !prevState.clientDays
-        }));
+    selectWithGift() {
+        this.selectPromoClick('withGift')
     }
 
+    selectClientDays() {
+        this.selectPromoClick('clientDays')
+    }
 
     render() {
         const {allPromos} = this.state;
         const {withGift} = this.state;
         const {clientDays} = this.state;
         return (
-            <SortFlexContainer>
-                <SelectBoxContainer>
-                    <SortRadio onClick={this.allPromosClick} isRadioActive={allPromos} content="Все акции"/>
-                    <SortRadio onClick={this.withGiftClick} isRadioActive={withGift} content="Подарок с покупкой"/>
-                    <SortRadio onClick={this.clientDaysClick} isRadioActive={clientDays} content="Клиентские дни"/>
-                </SelectBoxContainer>
+            <FilterFlexContainer>
+                <TogglesFlexContainer>
+                    <SortRadio clickHandler={this.selectAllPromo} isRadioActive={allPromos} content="Все акции"/>
+                    <SortRadio clickHandler={this.selectWithGift} isRadioActive={withGift} content="Подарок с покупкой"/>
+                    <SortRadio clickHandler={this.selectClientDays} isRadioActive={clientDays} content="Клиентские дни"/>
+                </TogglesFlexContainer>
 
-                <SelectBoxContainer>
-                    <StyledSpan>Сортировка:</StyledSpan>
+                <TogglesFlexContainer>
+                    <Label>Сортировка:</Label>
                     <Sort/>
                     <Sort/>
-                </SelectBoxContainer>
-            </SortFlexContainer>
+                </TogglesFlexContainer>
+            </FilterFlexContainer>
         )
     }
 }
@@ -150,7 +200,7 @@ export class Promotions extends React.Component {
                     <PromoHeading>
                         Акции
                     </PromoHeading>
-                    <ItemCountStyled>Найдено 13</ItemCountStyled>
+                    <ItemCount>Найдено 13</ItemCount>
                 </HeadingFlexContainer>
                 <SortingContainer/>
             </PromoContainer>
