@@ -38,7 +38,12 @@ const SortFlexContainer = FlexContainer.extend`
 `;
 
 const SelectBoxContainer = FlexContainer.extend`
-
+    & div {
+        flex-shrink: 0;
+    }
+    @media screen and (max-width: 900px) {
+        flex-direction: column;
+    }
 `;
 
 const SortingRadioButton = styled.div`
@@ -51,6 +56,13 @@ const SortingRadioButton = styled.div`
     cursor: pointer;
     color: #6a6a6a;
     ${props => props.isRadioActive && 'border-bottom: 1px solid #03b4ee; color: #000;'}
+    
+    @media screen and (max-width: 900px) {
+        margin-top: 10px;
+        &:first-child {
+           margin-top: 0;
+        }
+    }
 `;
 
 
@@ -113,11 +125,11 @@ class SortingContainer extends React.Component {
         const {clientDays} = this.state;
         return (
             <SortFlexContainer>
-                <div>
+                <SelectBoxContainer>
                     <SortRadio onClick={this.allPromosClick} isRadioActive={allPromos} content="Все акции"/>
                     <SortRadio onClick={this.withGiftClick} isRadioActive={withGift} content="Подарок с покупкой"/>
                     <SortRadio onClick={this.clientDaysClick} isRadioActive={clientDays} content="Клиентские дни"/>
-                </div>
+                </SelectBoxContainer>
 
                 <SelectBoxContainer>
                     <StyledSpan>Сортировка:</StyledSpan>

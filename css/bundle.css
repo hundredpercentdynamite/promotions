@@ -515,7 +515,7 @@ main::after {
   right: 0;
   bottom: 289px;
   height: 1px;
-  background-color: #eee;
+  /*background-color: #eee;*/
 }
 main::before {
   content: '';

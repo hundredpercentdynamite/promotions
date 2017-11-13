@@ -20,7 +20,20 @@ const StyledSort = styled.div`
         border-right: 1px solid #6a6a6a;
         transform: rotate(45deg);
         transition: all 0.5 ease-out;
-        ${props => props.showSort && 'border-top: 1px solid #6a6a6a; border-left: 1px solid #6a6a6a; border-bottom: none; border-right: none;'}
+        ${props => props.showSort && 'border-top: 1px solid #6a6a6a;' +
+                                     'border-left: 1px solid #6a6a6a;' +
+                                     ' border-bottom: none;' +
+                                     ' border-right: none;'
+        }
+    }
+    
+    @media screen and (max-width: 900px) {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    @media screen and (max-width: 379px) {
+        width: 130px;
     }
 `;
 
@@ -31,6 +44,7 @@ const SortList = styled.ul`
     box-sizing: border-box;
     background-color: #fcfcfc;
     width: 100%;
+    z-index: 100;
 `;
 
 const SortListItem = styled.li`
