@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SortBox = styled.div`
+const Box = styled.div`
     position: relative;
     bottom: -1px;
     margin-left: 20px;
@@ -32,25 +32,21 @@ const SortBox = styled.div`
     @media screen and (max-width: 900px) {
         margin-left: 0;
         margin-top: 10px;
-        font-size: 20px;
+        font-size: 15px;
         width: 250px;
     }
     
     @media screen and (max-width: 480px) {
-        margin-top: 20px;
-        font-size: 25px;
-        width: 250px;
+        width: 200px;
     }
     
     @media screen and (max-width: 380px) {
-        margin-top: 20px;
-        font-size: 25px;
         width: 100%;
     }
     
 `;
 
-const SortList = styled.ul`
+const List = styled.ul`
     padding: 10px 10px 15px 10px;
     position: absolute;
     top: 27px;
@@ -66,44 +62,40 @@ const SortList = styled.ul`
     }
 `;
 
-const SortListItem = styled.li`
+const Item = styled.li`
     padding: 5px 0;
+    cursor: pointer;
     &:hover {
         color: #cd097d;
     }
 `;
 
 // Компонент сортировки в виде select box
-export class Sort extends React.Component {
+export class Select extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.sorts = [
-            {code: 1, name: 'Все бренды', selected: false},
-            {code: 2, name: 'Не все бренды', selected: false},
-            {code: 3, name: 'В интернет-магазине', selected: false},
-            {code: 4, name: 'Что-то ещё', selected: true}
-        ];
-
-        const currentSort = this.sorts.filter(sortItem => sortItem.selected);
+        const currentItem = props.items.filter(item => item.selected);
         this.state = {
-            showSort: false,
-            currentSort: {...currentSort[0]}
-        }
+            showList: false,
+            currentItem: {...currentItem[0]}
+        };
+
+        this.listToggle = this.listToggle.bind(this);
+        this.clickItem = this.clickItem.bind(this);
     }
 
-    sortToggle() {
+    listToggle() {
         this.setState({
-            showSort: !this.state.showSort
+            showList: !this.state.showList
         });
         this.div.classList.toggle('active');
     }
 
-    clickSortItem(event) {
+    clickItem(event) {
         this.setState({
-            currentSort: {...event.target.dataset},
-            showSort: false
+            currentItem: {...event.target.dataset},
+            showList: false
         });
         this.div.classList.remove('active');
         //window.utils.sort = event.target.dataset.code;
@@ -111,23 +103,21 @@ export class Sort extends React.Component {
     }
 
     render() {
-        //let {sorts} = this.props;
-        const options = this.sorts.map((sortItem, i) => <SortListItem key={i}
-                                                     data-code={sortItem.code}
-                                                     data-name={sortItem.name}
-                                                     onClick={this.clickSortItem.bind(this)}>
-                                                     {sortItem.name}
-                                                  </SortListItem>);
+        const {showList, currentItem} = this.state;
+        const {items} = this.props;
+        const options = items.map((item, i) => <Item key={i}
+                                                     data-code={item.code}
+                                                     data-name={item.name}
+                                                     onClick={this.clickItem}>
+                                                     {item.name}
+                                                  </Item>);
         return (
-            <SortBox className="sort"
-                        onClick={this.sortToggle.bind(this)}
-                        showSort={this.state.showSort}>
-                <div className="current-name"
-                     ref={div => this.div = div}>
-                        {this.state.currentSort.name}
+            <Box onClick={this.listToggle} showList={showList}>
+                <div className="current-name" ref={div => this.div = div}>
+                    {currentItem.name}
                 </div>
-                {this.state.showSort && <SortList className="options animated fadeInUp">{options}</SortList>}
-            </SortBox>
+                {showList && <List className="animated fadeInUp">{options}</List>}
+            </Box>
         );
     }
 }

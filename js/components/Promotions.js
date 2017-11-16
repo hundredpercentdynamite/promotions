@@ -1,32 +1,34 @@
-import {Sort} from "./filter/Sort";
+import {Select} from "./filter/Select";
 import styled from "styled-components";
-import InfiniteScroll from 'react-infinite-scroller';
 
 
 const PromoContainer = styled.div`
     background-color: #fcfcfc;
 `;
 
+const ItemsContainer = styled.div`
+    padding: 30px 15px 50px 15px;
+    text-align: center;
+    & div {
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+`;
+
+const Banner = styled.img`
+        width: 100%;
+`;
+
 const PromoHeading = styled.h2`
     font-size: 24px;
     font-weight: 400;
-    @media screen and (max-width: 900px) {
-        font-size: 30px;
-    }
-    @media screen and (max-width: 480px) {
-        font-size: 35px;
-    }
 `;
 
 const ItemCount = styled.span`
     color: #6a6a6a;
     @media screen and (max-width: 900px) {
-        font-size: 20px;
+        font-size: 15px;
     }
-    @media screen and (max-width: 480px) {
-        font-size: 25px;
-    }
-
 `;
 
 const Label = styled.span`
@@ -34,11 +36,10 @@ const Label = styled.span`
     padding-bottom: 4px;
     color: #6a6a6a;
     @media screen and (max-width: 900px) {
-        font-size: 20px;
+        font-size: 15px;
     }
     @media screen and (max-width: 480px) {
-        margin-top: 40px;
-        font-size: 25px;
+        margin-top: 20px;
     }
 `;
 
@@ -54,8 +55,7 @@ const HeadingFlexContainer = FlexContainer.extend`
 `;
 
 const FilterFlexContainer = FlexContainer.extend`
-    padding: 15px;
-    padding-bottom: 0;
+    padding: 0 15px;
     border-bottom: 1px solid #e4e4e4;
     @media screen and (max-width: 480px) {
         flex-direction: column;
@@ -84,18 +84,17 @@ const FilterButton = styled.div`
     cursor: pointer;
     color: #6a6a6a;
     user-select: none;
-    ${props => props.isRadioActive && 'border-bottom: 1px solid #03b4ee; color: #000;'}
+    border-bottom: 1px solid transparent;
+    ${props => props.isRadioActive && 'border-bottom-color: #03b4ee; color: #000;'}
     
     @media screen and (max-width: 900px) {
         margin-top: 10px;
-        font-size: 20px;
+        font-size: 15px;
         &:first-child {
            margin-top: 0;
         }
     }
     @media screen and (max-width: 480px) {
-        margin-top: 20px;
-        font-size: 25px;
         &:first-child {
            margin-top: 0;
         }
@@ -155,16 +154,6 @@ const promotions = [
         imgUrl: "./img/darphine.png"
     },
     {
-        url: "prom_orthia",
-        name: "orthia",
-        imgUrl: "./img/orthia.png"
-    },
-    {
-        url: "prom_clinique",
-        name: "orthia",
-        imgUrl: "./img/clinique.png"
-    },
-    {
         url: "prom_darphin",
         name: "darphin",
         imgUrl: "./img/darphine.png"
@@ -178,12 +167,29 @@ const promotions = [
         url: "prom_clinique",
         name: "orthia",
         imgUrl: "./img/clinique.png"
+    },
+    {
+        url: "prom_darphin",
+        name: "darphin",
+        imgUrl: "./img/darphine.png"
     }
 ];
 
+const selectData1 = [
+    {code: 1, name: 'Все бренды', selected: true},
+    {code: 2, name: 'Adidas', selected: false},
+    {code: 3, name: 'Dior', selected: false},
+    {code: 4, name: 'Guerlan', selected: false}
+];
+const selectData2 = [
+    {code: 1, name: 'В интернет-магазине', selected: true},
+    {code: 2, name: 'В розничной сети', selected: false},
+];
+
+
 const Promotion = ({url, name, imgUrl}) => (
     <div data-url={url}>
-        <img src={imgUrl} alt={name}/>
+        <Banner src={imgUrl} alt={name}/>
     </div>
 );
 
@@ -257,8 +263,8 @@ class Sorting extends React.Component {
 
                 <TogglesFlexContainer>
                     <Label>Сортировка:</Label>
-                    <Sort/>
-                    <Sort/>
+                    <Select items={selectData1}/>
+                    <Select items={selectData2}/>
                 </TogglesFlexContainer>
             </FilterFlexContainer>
         )
@@ -269,29 +275,23 @@ class Sorting extends React.Component {
 export class Promotions extends React.Component {
     constructor() {
         super();
+
         this.state = {
             allPromos: true,
             withGift: false,
-            clientDays: false,
-            hasMoreItems: true,
-            promoItems: []
+            clientDays: false
         };
-        this.loadItems = this.loadItems.bind(this);
         this.updateState = this.updateState.bind(this);
-    }
-
-
-    loadItems() {
-        this.setState({promoItems: promotions})
     }
 
     updateState(obj) {
         this.setState(obj);
     }
 
+
     render() {
         const {allPromos, withGift, clientDays} = this.state;
-        const promotionsItems = this.state.promoItems.map((promotion, i) => <Promotion key={i} {...promotion}/>);
+        const promotionsHtml = promotions.map((promo, i) => <Promotion key={i} url={promo.url} name={promo.name} imgUrl={promo.imgUrl}/>)
         return (
             <PromoContainer>
                 <HeadingFlexContainer>
@@ -301,14 +301,9 @@ export class Promotions extends React.Component {
                     <ItemCount>Найдено 13</ItemCount>
                 </HeadingFlexContainer>
                 <Sorting updateState={this.updateState} allPromos={allPromos} withGift={withGift} clientDays={clientDays}/>
-                <div>
-                    <InfiniteScroll pageStart={0}
-                                    loader={<div className="loader">Loading</div>}
-                                    loadMore={this.loadItems}
-                                    hasMore={this.state.hasMoreItems}>
-                        {promotionsItems}
-                    </InfiniteScroll>
-                </div>
+                <ItemsContainer>
+                    {promotionsHtml}
+                </ItemsContainer>
             </PromoContainer>
         );
     }
