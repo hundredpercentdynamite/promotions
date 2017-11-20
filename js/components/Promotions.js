@@ -1,6 +1,11 @@
 import {Select} from "./filter/Select";
+// import {PromoPage} from "./PromoPage";
 import styled from "styled-components";
-
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from 'react-router-dom';
 
 const PromoContainer = styled.div`
     background-color: #fcfcfc;
@@ -188,8 +193,10 @@ const selectData2 = [
 
 
 const Promotion = ({url, name, imgUrl}) => (
-    <div data-url={url}>
-        <Banner src={imgUrl} alt={name}/>
+    <div>
+        <Link to={`/${url}`}>
+            <Banner src={imgUrl} alt={name}/>
+        </Link>
     </div>
 );
 
@@ -247,7 +254,6 @@ class Sorting extends React.Component {
     }
 
 
-
     render() {
         const {allPromos, withGift, clientDays} = this.props;
 
@@ -271,6 +277,37 @@ class Sorting extends React.Component {
     }
 }
 
+class PromoHome extends React.Component {
+    render() {
+        const {updateState, allPromos, withGift, clientDays} = this.props;
+        const promotionsHtml = promotions.map((promo, i) => <Promotion key={i} url={promo.url} name={promo.name}
+                                                                       imgUrl={promo.imgUrl}/>);
+        return (
+            <div>
+                <HeadingFlexContainer>
+                    <PromoHeading>
+                        Акции
+                    </PromoHeading>
+                    <ItemCount>Найдено {promotions.length}</ItemCount>
+                </HeadingFlexContainer>
+                <Sorting updateState={updateState} allPromos={allPromos} withGift={withGift}
+                         clientDays={clientDays}/>
+                <ItemsContainer>
+                    {promotionsHtml}
+                </ItemsContainer>
+            </div>
+        )
+    }
+}
+
+const PromoPage = ({match}) => (
+
+    <div>
+        <Link to={`/promotions`}>&lt; Назад</Link>
+        <h3>Privet</h3>
+    </div>
+);
+
 
 export class Promotions extends React.Component {
     constructor() {
@@ -291,20 +328,17 @@ export class Promotions extends React.Component {
 
     render() {
         const {allPromos, withGift, clientDays} = this.state;
-        const promotionsHtml = promotions.map((promo, i) => <Promotion key={i} url={promo.url} name={promo.name} imgUrl={promo.imgUrl}/>)
+
         return (
-            <PromoContainer>
-                <HeadingFlexContainer>
-                    <PromoHeading>
-                        Акции
-                    </PromoHeading>
-                    <ItemCount>Найдено 13</ItemCount>
-                </HeadingFlexContainer>
-                <Sorting updateState={this.updateState} allPromos={allPromos} withGift={withGift} clientDays={clientDays}/>
-                <ItemsContainer>
-                    {promotionsHtml}
-                </ItemsContainer>
-            </PromoContainer>
+            <Router>
+                <PromoContainer>
+                    <Route path="/promotions" render={() => <PromoHome updateState={this.updateState}
+                                                                       allPromos={allPromos}
+                                                                       withGift={withGift}
+                                                                       clientDays={clientDays}/>}/>
+                    <Route path={`/prom_darphin`} component={PromoPage}/>
+                </PromoContainer>
+            </Router>
         );
     }
 }
