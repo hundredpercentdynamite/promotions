@@ -49,9 +49,10 @@ const Box = styled.div`
 const List = styled.ul`
     padding: 10px 10px 15px 10px;
     position: absolute;
-    top: 27px;
+    top: 30px;
     box-sizing: border-box;
     background-color: #fcfcfc;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
     width: 100%;
     z-index: 100;
     @media screen and (max-width: 900px) {

@@ -37,6 +37,8 @@
     "nouislider": "^9.2.0",
     "ramda": "^0.25.0",
     "react": "^16.0.0",
+    "react-autosuggest": "^9.3.2",
+    "react-autowhatever": "^10.1.0",
     "react-dom": "^16.0.0",
     "react-infinite-scroll-component": "^2.5.0",
     "react-motion": "^0.4.7",
