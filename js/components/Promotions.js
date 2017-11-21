@@ -1,4 +1,5 @@
 import {Select} from "./filter/Select";
+import {Switch} from "react-router-dom";
 // import {PromoPage} from "./PromoPage";
 import styled from "styled-components";
 import {
@@ -12,7 +13,7 @@ const PromoContainer = styled.div`
 `;
 
 const ItemsContainer = styled.div`
-    padding: 30px 15px 50px 15px;
+    padding: 30px 25px 50px 25px;
     text-align: center;
     & div {
         overflow: hidden;
@@ -106,12 +107,118 @@ const FilterButton = styled.div`
     }
 `;
 
+//PromoPage ----------------------------
+const PromPageContainer = ItemsContainer.extend`
+    text-align: left;
+    & div {
+        overflow: auto;
+        margin-bottom: 0;
+    }
+`;
+
+const DescriptionContainer = styled.div`
+    padding: 50px 130px 95px 130px;
+    border-bottom: 1px solid #e4e4e4;
+    @media screen and (max-width: 768px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+`;
+
+const Back = PromoHeading.extend`
+    padding-left: 50px;
+    color: #000;
+    background: url("./img/back.svg") no-repeat left;
+    background-size: 25px;
+`;
+
+const Heading = styled.h2`
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-weight: 400;
+`;
+
+const Parag = styled.p`
+    font-size: 16px;
+    color: #4a4a4a;
+`;
+
+const Description = Parag.extend`
+    margin-bottom: 70px;
+`;
+
+const Include = Parag.extend`
+    margin-bottom: 65px;
+    font-size: 22px;
+    font-weight: 300;
+    color: #5e0e8a;
+`;
+//------------------------------------------
 
 const promotions = [
     {
+        url: "prom_darphin1",
+        name: "darphin",
+        imgUrl: "./img/darphine.png",
+        heading: "Окунитесь в атмосферу прованса! gift: true",
+        description: "Изысканная мягкость средств ухода с экстрактом грейпфрута и маслом лаванды дарит коже интенсивное увлажнение, питание, защиту и гладкость.",
+        include: "гель для душа 250мл, крем для рук и ногтей 75мл, молочко для тела 75мл.",
+        effect: "Благодаря своей лёгкой текстуре молочко быстро впитывается и не оставляет следов. Прекрасно увлажняет, тонизирует и освежает кожу, делает её мягкой и гладкой.",
+        gift: true
+    },
+    {
+        url: "prom_orthia2",
+        name: "orthia",
+        imgUrl: "./img/orthia.png",
+        heading: "SMASHBOX DRAWN IN. DECKED OUT. gift: true",
+        description: "Две полноразмерные палетки для глаз Cover Shot (Ablaze, Sultry) с семью яркими оттенками теней и палетка для стробинга Spotlight (Pearl) travel-формата для создания сияющего макияжа в любой ситуации.",
+        include: "Shadow + Highlight",
+        effect: "Срок годности указан на товаре. Мы поставляем товар с надлежащим сроком годности",
+        gift: true
+    },
+    {
+        url: "prom_clinique",
+        name: "clinique",
+        imgUrl: "./img/clinique.png",
+        heading: "Окунитесь в атмосферу прованса!",
+        description: "Изысканная мягкость средств ухода с экстрактом грейпфрута и маслом лаванды дарит коже интенсивное увлажнение, питание, защиту и гладкость.",
+        include: "гель для душа 250мл, крем для рук и ногтей 75мл, молочко для тела 75мл.",
+        effect: "Благодаря своей лёгкой текстуре молочко быстро впитывается и не оставляет следов. Прекрасно увлажняет, тонизирует и освежает кожу, делает её мягкой и гладкой."
+    },
+    {
         url: "prom_darphin",
         name: "darphin",
-        imgUrl: "./img/darphine.png"
+        imgUrl: "./img/darphine.png",
+        heading: "Окунитесь в атмосферу прованса!",
+        description: "Изысканная мягкость средств ухода с экстрактом грейпфрута и маслом лаванды дарит коже интенсивное увлажнение, питание, защиту и гладкость.",
+        include: "гель для душа 250мл, крем для рук и ногтей 75мл, молочко для тела 75мл.",
+        effect: "Благодаря своей лёгкой текстуре молочко быстро впитывается и не оставляет следов. Прекрасно увлажняет, тонизирует и освежает кожу, делает её мягкой и гладкой."
+    },
+    {
+        url: "prom_orthia3",
+        name: "orthia",
+        imgUrl: "./img/orthia.png",
+        heading: "Окунитесь в атмосферу прованса! gift: true",
+        description: "Изысканная мягкость средств ухода с экстрактом грейпфрута и маслом лаванды дарит коже интенсивное увлажнение, питание, защиту и гладкость.",
+        include: "гель для душа 250мл, крем для рук и ногтей 75мл, молочко для тела 75мл.",
+        effect: "Благодаря своей лёгкой текстуре молочко быстро впитывается и не оставляет следов. Прекрасно увлажняет, тонизирует и освежает кожу, делает её мягкой и гладкой.",
+        gift: true
+    },
+    {
+        url: "prom_clinique",
+        name: "clinique",
+        imgUrl: "./img/clinique.png",
+        heading: "Окунитесь в атмосферу прованса!",
+        description: "Изысканная мягкость средств ухода с экстрактом грейпфрута и маслом лаванды дарит коже интенсивное увлажнение, питание, защиту и гладкость.",
+        include: "гель для душа 250мл, крем для рук и ногтей 75мл, молочко для тела 75мл.",
+        effect: "Благодаря своей лёгкой текстуре молочко быстро впитывается и не оставляет следов. Прекрасно увлажняет, тонизирует и освежает кожу, делает её мягкой и гладкой."
+    },
+    {
+        url: "prom_client1",
+        name: "darphin",
+        imgUrl: "./img/darphine.png",
+        heading: "clientDay: true",
+        clientDay: true
     },
     {
         url: "prom_orthia",
@@ -120,37 +227,7 @@ const promotions = [
     },
     {
         url: "prom_clinique",
-        name: "orthia",
-        imgUrl: "./img/clinique.png"
-    },
-    {
-        url: "prom_darphin",
-        name: "darphin",
-        imgUrl: "./img/darphine.png"
-    },
-    {
-        url: "prom_orthia",
-        name: "orthia",
-        imgUrl: "./img/orthia.png"
-    },
-    {
-        url: "prom_clinique",
-        name: "orthia",
-        imgUrl: "./img/clinique.png"
-    },
-    {
-        url: "prom_darphin",
-        name: "darphin",
-        imgUrl: "./img/darphine.png"
-    },
-    {
-        url: "prom_orthia",
-        name: "orthia",
-        imgUrl: "./img/orthia.png"
-    },
-    {
-        url: "prom_clinique",
-        name: "orthia",
+        name: "clinique",
         imgUrl: "./img/clinique.png"
     },
     {
@@ -164,14 +241,18 @@ const promotions = [
         imgUrl: "./img/darphine.png"
     },
     {
-        url: "prom_orthia",
+        url: "prom_client2",
         name: "orthia",
-        imgUrl: "./img/orthia.png"
+        imgUrl: "./img/orthia.png",
+        heading: "clientDay: true",
+        clientDay: true
     },
     {
-        url: "prom_clinique",
-        name: "orthia",
-        imgUrl: "./img/clinique.png"
+        url: "prom_client3",
+        name: "clinique",
+        imgUrl: "./img/clinique.png",
+        heading: "clientDay: true",
+        clientDay: true
     },
     {
         url: "prom_darphin",
@@ -191,10 +272,11 @@ const selectData2 = [
     {code: 2, name: 'В розничной сети', selected: false},
 ];
 
+let filteredContent = promotions;
 
 const Promotion = ({url, name, imgUrl}) => (
     <div>
-        <Link to={`/${url}`}>
+        <Link to={`/promotions/${url}`}>
             <Banner src={imgUrl} alt={name}/>
         </Link>
     </div>
@@ -242,15 +324,22 @@ class Sorting extends React.Component {
     }
 
     selectAllPromo() {
-        this.selectPromoClick("allPromo")
+        this.selectPromoClick("allPromo");
+        filteredContent = promotions;
     }
 
     selectWithGift() {
-        this.selectPromoClick("withGift")
+        this.selectPromoClick('withGift');
+        filteredContent = promotions.filter(function(element) {
+            return (element.gift === true)
+        });
     }
 
     selectClientDays() {
-        this.selectPromoClick("clientDays")
+        this.selectPromoClick("clientDays");
+        filteredContent = promotions.filter(function(element) {
+            return (element.clientDay === true)
+        });
     }
 
 
@@ -277,10 +366,11 @@ class Sorting extends React.Component {
     }
 }
 
+
 class PromoHome extends React.Component {
     render() {
         const {updateState, allPromos, withGift, clientDays} = this.props;
-        const promotionsHtml = promotions.map((promo, i) => <Promotion key={i} url={promo.url} name={promo.name}
+        const promotionsHtml = filteredContent.map((promo, i) => <Promotion key={i} url={promo.url} name={promo.name}
                                                                        imgUrl={promo.imgUrl}/>);
         return (
             <div>
@@ -288,7 +378,7 @@ class PromoHome extends React.Component {
                     <PromoHeading>
                         Акции
                     </PromoHeading>
-                    <ItemCount>Найдено {promotions.length}</ItemCount>
+                    <ItemCount>Найдено {filteredContent.length}</ItemCount>
                 </HeadingFlexContainer>
                 <Sorting updateState={updateState} allPromos={allPromos} withGift={withGift}
                          clientDays={clientDays}/>
@@ -300,11 +390,24 @@ class PromoHome extends React.Component {
     }
 }
 
-const PromoPage = ({match}) => (
+
+
+const PromoPage = ({imgUrl, name, heading, description, include, effect}) => (
 
     <div>
-        <Link to={`/promotions`}>&lt; Назад</Link>
-        <h3>Privet</h3>
+        <HeadingFlexContainer>
+            <Link to={`/promotions/promotions.html`}><Back>{name}</Back></Link>
+        </HeadingFlexContainer>
+        <FilterFlexContainer/>
+        <PromPageContainer>
+            <Banner src={imgUrl} alt={name}/>
+            <DescriptionContainer>
+                <Heading>{heading}</Heading>
+                <Description>{description}</Description>
+                <Include>В наборе: {include}</Include>
+                <Parag>{effect}</Parag>
+            </DescriptionContainer>
+        </PromPageContainer>
     </div>
 );
 
@@ -332,11 +435,19 @@ export class Promotions extends React.Component {
         return (
             <Router>
                 <PromoContainer>
-                    <Route path="/promotions" render={() => <PromoHome updateState={this.updateState}
-                                                                       allPromos={allPromos}
-                                                                       withGift={withGift}
-                                                                       clientDays={clientDays}/>}/>
-                    <Route path={`/prom_darphin`} component={PromoPage}/>
+                    <Switch>
+                        <Route path="/promotions/promotions.html"
+                               render={() => <PromoHome updateState={this.updateState}
+                                                        allPromos={allPromos}
+                                                        withGift={withGift}
+                                                        clientDays={clientDays}/>}/>
+                        {promotions.map((route, index) => (
+                            <Route key={index}
+                                   path={`/promotions/${route.url}`}
+                                   render={() => <PromoPage {...route}/>}
+                            />
+                        ))}
+                    </Switch>
                 </PromoContainer>
             </Router>
         );
