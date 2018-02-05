@@ -1,0 +1,167 @@
+{
+  "promotions":  [
+    {
+      "url": "prom_darphin1",
+      "name": "darphinNEW_ADIDAS",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/darphine.png",
+      "variant": "gift",
+      "brand": "adidas",
+      "location": "offline"
+    },
+    {
+      "url": "prom_orthia1",
+      "name": "orthiaNEW",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "variant": "gift",
+      "brand": "adidas",
+      "location": "online"
+    },
+    {
+      "url": "prom_clinique1",
+      "name": "cliniqueCLIENT",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/clinique.png",
+      "variant": "client",
+      "brand": "dior",
+      "location": "online"
+    },
+    {
+      "url": "prom_darphin2",
+      "name": "darphinCLIENT",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/darphine.png",
+      "variant": "client",
+      "brand": "adidas",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia2",
+      "name": "orthiaNEW",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "variant": "gift",
+      "brand": "guerlan",
+      "location": "online"
+    },
+    {
+      "url": "prom_clinique2",
+      "name": "cliniqueCLIENT",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/clinique.png",
+      "variant": "client",
+      "brand": "guerlan",
+      "location": "online"
+    },
+    {
+      "url": "prom_client1",
+      "name": "darphinNEW",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/darphine.png",
+      "variant": "gift",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_clinique3",
+      "name": "clinique",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/clinique.png",
+      "brand": "mac",
+      "location": "offline"
+    },
+    {
+      "url": "prom_darphin3",
+      "name": "darphin",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/darphine.png",
+      "variant": "client",
+      "brand": "adidas",
+      "location": "offline"
+    },
+    {
+      "url": "prom_darphin4",
+      "name": "darphin",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/darphine.png",
+      "brand": "gosh",
+      "location": "offline"
+    },
+    {
+      "url": "prom_client2",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "gosh",
+      "location": "offline"
+    },
+    {
+      "url": "prom_client3",
+      "name": "clinique",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/clinique.png",
+      "brand": "gosh",
+      "location": "offline"
+    },
+    {
+      "url": "prom_darphin5",
+      "name": "darphin",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/darphine.png",
+      "variant": "client",
+      "brand": "adidas",
+      "location": "offline"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    },
+    {
+      "url": "prom_orthia3",
+      "name": "orthia",
+      "imgUrl": "https://localhost:9002/newstore/_ui/desktop/theme-responsive/images/promotions/orthia.png",
+      "brand": "mac",
+      "location": "online"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import {Promotions} from "./components/promotions";
+import {Promotions} from "./components/promotions/Promotions";
 
 
 class App extends React.Component {
